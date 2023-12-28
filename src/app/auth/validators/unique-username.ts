@@ -18,12 +18,12 @@ export class UniqueUsername implements AsyncValidator {
   validate = (
     control: AbstractControl,
   ): Observable<ValidationErrors | null> => {
-    return this.authService.userNameAvailable(control.value).pipe(
+    const { value } = control;
+    return this.authService.userNameAvailable(value).pipe(
       map(() => {
         return null;
       }),
       catchError((err) => {
-        console.log(err.error.username);
         if (err.error.username) {
           return of({
             nonUniqueUsername: true,

@@ -1,17 +1,23 @@
-<input type="text">
 <div class="field">
   <label>{{ label }}</label>
-  <input type="text" [formControl]="control">
+  <input [type]="inputType" [formControl]="control">
+  <ng-container
+    *ngIf="showErrors()">
+    <div class="ui pointing red basic label" *ngIf="control.errors?.['required']">
+      Please enter a valid username!
+    </div>
+    <div class="ui pointing red basic label" *ngIf="control.errors?.['minlength']">
+      Value is too short!
+    </div>
+    <div class="ui pointing red basic label" *ngIf="control.errors?.['maxlength']">
+      Value is too long!
+    </div>
+    <div class="ui pointing red basic label" *ngIf="control.errors?.['pattern']">
+      Invalid format!
+    </div>
+    <div class="ui pointing red basic label" *ngIf="control.errors?.['nonUniqueUsername']">
+      Username is already taken!
+    </div>
+  </ng-container>
 </div>
-<ng-container
-  *ngIf="showErrors()">
-  <div class="help is-danger" *ngIf="control.errors?.['nonUniqueUsername']">
-    username is not unique
-  </div>
-  <div class="help is-danger" *ngIf="control.errors?.['minlength']">
-    Value is too short!
-  </div>
-  <div class="is-danger help" *ngIf="control.errors?.['maxlength']">
-    Value is too long!
-  </div>
-</ng-container>
+

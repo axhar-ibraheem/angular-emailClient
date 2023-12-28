@@ -1,26 +1,25 @@
 <h3>Create an account</h3>
 <form class="ui form" action="" [formGroup]="authForm">
-  <!--  <div class="field">-->
-  <!--    <label>Username</label>-->
-  <!--    <input formControlName="username">-->
-  <!--  </div>-->
-  <app-input label="Username" [control]="authForm.controls.username"></app-input>
-  {{ authForm.get('username')?.errors | json }}
-  <div class="field">
-    <label>Password</label>
-    <input formControlName="password">
-  </div>
-  {{ authForm.get('password')?.errors | json }}
-  <div class="field">
-    <label>Confirm Password</label>
-    <input formControlName="passwordConfirmation">
-  </div>
-  {{ authForm.get('passwordConfirmation')?.errors | json }}
+  <app-input label="Username" inputType="text" [control]="authForm.controls.username"></app-input>
+  <app-input label="Password" inputType="password" [control]="authForm.controls.password"></app-input>
+  <app-input label="Confirm Password" inputType="password"
+             [control]="authForm.controls.passwordConfirmation"></app-input>
+  <ng-container
+    *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors">
+    <div class="ui red basic label">
+      <p *ngIf="authForm.errors?.['passwordMismatch']">
+        Passwords not match!
+      </p>
+    </div>
 
-  <button class="ui submit button primary">
-    Submit
-  </button>
+  </ng-container>
+  <div>
+    <button class="ui submit button primary ">
+      Submit
+    </button>
+  </div>
+
 </form>
 
-{{ authForm.errors | json }}
+
 
