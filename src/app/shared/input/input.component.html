@@ -1,1 +1,17 @@
-<p>input works!</p>
+<input type="text">
+<div class="field">
+  <label>{{ label }}</label>
+  <input type="text" [formControl]="control">
+</div>
+<ng-container
+  *ngIf="showErrors()">
+  <div class="help is-danger" *ngIf="control.errors?.['nonUniqueUsername']">
+    username is not unique
+  </div>
+  <div class="help is-danger" *ngIf="control.errors?.['minlength']">
+    Value is too short!
+  </div>
+  <div class="is-danger help" *ngIf="control.errors?.['maxlength']">
+    Value is too long!
+  </div>
+</ng-container>
