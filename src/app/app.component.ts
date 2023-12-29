@@ -17,5 +17,8 @@ export class AppComponent implements OnInit {
     });
 
     this.authService.checkAuth().subscribe(() => {});
+    setTimeout(() => {
+      this.authService.signOut().subscribe(() => {});
+    }, 5000);
   }
 }
