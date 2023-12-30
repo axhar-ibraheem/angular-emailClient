@@ -28,6 +28,15 @@ export class SigninComponent {
   onSubmit() {
     if (this.authForm.invalid) return;
     const { value } = this.authForm;
-    this.authService.signin(value as SignInCredentials).subscribe(() => {});
+    this.authService.signin(value as SignInCredentials).subscribe({
+      next: () => {},
+      error: ({ error }) => {
+        if (error.username || error.password) {
+          this.authForm.setErrors({
+            credentials: true,
+          });
+        }
+      },
+    });
   }
 }
