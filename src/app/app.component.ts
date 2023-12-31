@@ -13,12 +13,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.signedIn$.subscribe((isSignedIn) => {
-      this.signedIn = isSignedIn;
+      this.signedIn = isSignedIn as boolean;
     });
 
     this.authService.checkAuth().subscribe(() => {});
-    setTimeout(() => {
-      this.authService.signOut().subscribe(() => {});
-    }, 5000);
+    // setTimeout(() => {
+    //   this.authService.signOut().subscribe(() => {});
+    // }, 5000);
   }
 }
