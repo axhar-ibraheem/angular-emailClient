@@ -1,33 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Email, EmailService } from '../email.service';
-import { switchMap } from 'rxjs';
+import { Email } from '../email.service';
 
 @Component({
   selector: 'app-email-show',
   templateUrl: './email-show.component.html',
   styleUrls: ['./email-show.component.css'],
 })
-export class EmailShowComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private emailService: EmailService,
-  ) {}
-
-  ngOnInit() {
-    // this.activatedRoute.params.subscribe(({ id }) => {
-    //   this.emailService.getEmail(id).subscribe((email) => {
-    //     console.log(email);
-    //   });
-    // });
-    this.route.params
-      .pipe(
-        switchMap(({ id }) => {
-          return this.emailService.getEmail(id);
-        }),
-      )
-      .subscribe((email) => {
-        console.log(email);
-      });
+export class EmailShowComponent {
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe((data) => {
+      const { email } = data;
+      this.email = email;
+    });
+    // console.log(this.route.snapshot.data);
   }
+
+  email!: Email;
 }
